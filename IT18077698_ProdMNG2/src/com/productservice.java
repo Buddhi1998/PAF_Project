@@ -79,7 +79,7 @@ public class productservice {
 	}
 	
 	
-	//DELETE DATAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	//DELETE DATAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
