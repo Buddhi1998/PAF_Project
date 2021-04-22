@@ -19,7 +19,7 @@ private Connection connect()
  }
 
 
-//insert
+//insert(db)
 	public String insertproduct(String id, String name, String amount, String des)
 	 {
 	 String output = "";
