@@ -65,7 +65,8 @@ private Connection connect()
 	 {return "Error while connecting to the database for reading."; }
 	 
 	 // Prepare the html table to be displayed
-	 output = "<table border='1'><tr><th>fund id</th><th>fund Name</th>" +"<th>fund amount</th>" +"<th>fund location</th>" +"<th>Update</th><th>Remove</th></tr>";
+		 output = "<table border='1'><tr><th>funderID</th><th>funderName</th>" +"<th>fundAmount</th>" +"<th>funderLocation</th>" +"<th>Update</th><th>Remove</th></tr>";
+
 	
 	 String query = "select * from fund";
 	 Statement stmt = con.createStatement();
