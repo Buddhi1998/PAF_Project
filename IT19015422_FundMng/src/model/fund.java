@@ -19,7 +19,7 @@ private Connection connect()
  }
 
 
-//insert
+//INSERT CRUD
 	public String insertfund(String id, String name, String amount, String location)
 	 {
 	 String output = "";
@@ -54,7 +54,7 @@ private Connection connect()
 
 
 
-//read
+//VIEW CRUD
 	public String readfund()
 	 {
 	 String output = "";
@@ -105,7 +105,7 @@ private Connection connect()
 
 
 
-//update
+//UPDATE CRUD
 	public String updatefund(String id, String name, String amount, String location)
 	{
 	 String output = "";
@@ -140,7 +140,7 @@ private Connection connect()
 	 }
 
 
-//delete
+//DELETE CRUD
 	public String deletefund(String id)
 	 {
 	 String output = "";
