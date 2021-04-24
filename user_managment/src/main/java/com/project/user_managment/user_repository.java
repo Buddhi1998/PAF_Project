@@ -108,6 +108,23 @@ public user getuserid(int Id) {
 	return ur;
 }
 
+public String deleteuser(int Id) {
+	String output = "";
+	try {
+		Connection con = getConnection();
+		
+		String deleteuser = "DELETE FROM `users` WHERE `Id` = '"+Id+"'";
+		PreparedStatement ps = con.prepareStatement(deleteuser);
+		ps.execute();
+		
+		output = "Delete Successful";
+		con.close();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return output;
+}
 
 public String readAddusers() {
 	String output = "";
