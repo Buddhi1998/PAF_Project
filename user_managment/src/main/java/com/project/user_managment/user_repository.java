@@ -126,6 +126,29 @@ public String deleteuser(int Id) {
 	return output;
 }
 
+public String updateUser(user u1) {
+	String output = "";
+	
+	try {
+		Connection con = getConnection();
+		
+		String updateUser = "UPDATE `users` SET Id='"+u1.getId()+"',Fname='"+u1.getFname()+"',Lname='"+u1.getLname()+"',Email='"+u1.getEmail()+"',Address='"+u1.getAddress()+"',Phone_n='"+u1.getPhone_n()+"',username='"+u1.getUsername()+"',password='"+u1.getPassword()+"' WHERE Id='"+u1.getId()+"'";
+		PreparedStatement st = con.prepareStatement(updateUser);
+		st.executeUpdate();
+		
+		output = "Updated Successful";
+		
+		con.close();
+	
+		
+	}catch(SQLException e) {
+		output = "Error!!";
+		e.printStackTrace();
+	}
+	
+	return output;
+}
+
 public String readAddusers() {
 	String output = "";
 	
