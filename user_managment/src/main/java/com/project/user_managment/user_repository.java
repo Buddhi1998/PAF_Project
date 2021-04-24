@@ -78,7 +78,7 @@ public user createuser(user u1) {
 }
 
 
-}
+
 public String readAddusers() {
 	String output = "";
 	
