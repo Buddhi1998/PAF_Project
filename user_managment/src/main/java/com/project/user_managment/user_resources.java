@@ -64,9 +64,9 @@ user_repository ur = new user_repository();
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN) 
 	
-	public String updateUser(user u1) 
+	public String updateUser(user u2) 
 	{ 
-		return ur.updateUser(u1);
+		return ur.updateUser(u2);
 	}
 	
 	
@@ -75,6 +75,13 @@ user_repository ur = new user_repository();
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<user> getAlluser(){
 		return ur.getAllUsers();
+	}
+	@GET
+	@Path("/read")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String readUsers()
+	{
+		return ur.readAddusers();
 	}
 	
 }

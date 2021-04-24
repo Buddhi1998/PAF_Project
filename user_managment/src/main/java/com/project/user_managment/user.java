@@ -3,7 +3,7 @@ package com.project.user_managment;
 import java.util.Arrays;
 
 public class user {
-	public int id;
+	public int Id;
 	public String Fname;
 	public String Lname;
 	public String Email;
@@ -12,11 +12,12 @@ public class user {
 	public String username;
 	public String password;
 	
+	
 	public int getId() {
-		return id;
+		return Id;
 	}
 	public void setId(int id) {
-		this.id = id;
+		Id = id;
 	}
 	public String getFname() {
 		return Fname;
@@ -66,9 +67,10 @@ public class user {
 	}
 	@Override
 	public String toString() {
-		return "user [id=" + id + ", Fname=" + Fname + ", Lname=" + Lname + ", Email=" + Email + ", Address=" + Address
+		return "user [Id=" + Id + ", Fname=" + Fname + ", Lname=" + Lname + ", Email=" + Email + ", Address=" + Address
 				+ ", Phone_n=" + Phone_n + ", username=" + username + ", password=" + password + "]";
 	}
+	
 	
 	
 	

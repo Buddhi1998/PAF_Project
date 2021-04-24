@@ -1,10 +1,5 @@
 package com.project.user_managment;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;  
@@ -34,21 +29,9 @@ public class user_repository {
 List<user> users;
 
 public user_repository() {
-	
-	
-	String url = "Jdbc:mysql://localhost:3306/user_m";
-	String username = "root";
-	String password = "";
-	Connection con = getconnection();
-	
 
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection(url,username,password);
-		
-	}catch (Exception e) {
-		System.out.println(e);
-	}
+	Connection con = getConnection();
+
 	
 	users = new ArrayList<>();
 	
@@ -72,11 +55,11 @@ public List<user> getAllUsers(){
 
 public user createuser(user u1) {
 	
-	String insertSql = "INSERT INTO `users`(`Id`, `Fname`,`Lname`,`Email`,`Address`, `Phone_n`, `username`,`password`) VALUES (?,?,?,?,?,?,?)";
+	String insertSql = "INSERT INTO `users`(`Id`, `Fname`, `Lname`, `Email`, `Address`, `Phone_n`, `username`, `password`) VALUES (?,?,?,?,?,?,?,?)";
 	Connection con = getConnection();
 	try {
 		PreparedStatement st = con.prepareStatement(insertSql);
-		st.setInt(1, u1.id);
+		st.setInt(1, u1.Id);
 		st.setString(2, u1.Fname);
 		st.setString(3, u1.Lname);
 		st.setString(4, u1.Email);
@@ -91,11 +74,11 @@ public user createuser(user u1) {
 	}
 	users.add(u1);
 	System.out.println(users);
-	return (u1);
+	return u1;
 }
 
-public user getuserid(int id) {
-	String getsql = "SELECT * FROM `users` WHERE `Id` = '"+id+"' ";
+public user getuserid(int Id) {
+	String getsql = "SELECT * FROM `users` WHERE `Id` = '"+Id+"' ";
 	user ur = new user();
 	Connection con = getConnection();
 	
@@ -126,12 +109,12 @@ public user getuserid(int id) {
 }
 
 
-public String deleteuser(int id) {
+public String deleteuser(int Id) {
 	String output = "";
 	try {
 		Connection con = getConnection();
 		
-		String deleteuser = "DELETE FROM `users` WHERE `Id` = '"+id+"'";
+		String deleteuser = "DELETE FROM `users` WHERE `Id` = '"+Id+"'";
 		PreparedStatement ps = con.prepareStatement(deleteuser);
 		ps.execute();
 		
@@ -144,28 +127,78 @@ public String deleteuser(int id) {
 	return output;
 }
 	
-public String updateUser(user user) {
+public String updateUser(user u1) {
 	String output = "";
 	
 	try {
 		Connection con = getConnection();
 		
-		String updateuser = "UPDATE `users` SET `Id`='"+user.getId()+"',Fname='"+user.getFname()+"',Lname='"+user.getLname()+"',Email='"+user.getEmail()+"',Address='"+user.getAddress()+"',Phone_n='"+user.getPhone_n()+"',username='"+user.getUsername()+"',password='"+user.getPassword()+"' WHERE id='"+user.getId()+"'";
-		PreparedStatement st = con.prepareStatement(updateuser);
-
+		String updateUser = "UPDATE `users` SET Id='"+u1.getId()+"',Fname='"+u1.getFname()+"',Lname='"+u1.getLname()+"',Email='"+u1.getEmail()+"',Address='"+u1.getAddress()+"',Phone_n='"+u1.getPhone_n()+"',username='"+u1.getUsername()+"',password='"+u1.getPassword()+"' WHERE Id='"+u1.getId()+"'";
+		PreparedStatement st = con.prepareStatement(updateUser);
 		st.executeUpdate();
+		
 		output = "Updated Successful";
+		
 		con.close();
+	
+		
 	}catch(SQLException e) {
+		output = "Error!!";
 		e.printStackTrace();
 	}
 	
 	return output;
 
 }
-private Connection getconnection() {
-	// TODO Auto-generated method stub
-	return null;
-}
+public String readAddusers() {
+	String output = "";
 	
+	try {
+		//connect to DB
+		Connection con = getConnection();
+		
+		if (con == null)
+		{return "Error while connecting to the database for reading."; }
+		output = "<table border='1'><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Address</th><th>Contact No</th><th>Username</th><th>Password</th>" ;	
+		String query = "SELECT * FROM `users`";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		//iterate through the rows in the result set
+		while (rs.next())
+		{
+			String Id = Integer.toString(rs.getInt ("Id"));
+			String Fname = rs.getString("Fname");
+			String Lname = rs.getString("Lname");
+			String Email = rs.getString("Email");
+			String Address = rs.getString("Address");
+			String Phone_n = rs.getString("Phone_n");
+			String username = rs.getString("username");
+			String password = rs.getString("password");
+			
+			//Add into the html table
+			
+			output +="<tr><td>" + Id + "</td>";
+			output +="<td>" + Fname + "</td>";
+			output +="<td>" + Lname + "</td>";
+			output +="<td>" + Email + "</td>";
+			output +="<td>" + Address + "</td>";
+			output +="<td>" + Phone_n + "</td>";
+			output +="<td>" + username + "</td>";
+			output +="<td>" + password + "</td>";
+			
+		}
+		//close th db connection
+		con.close();
+		
+		//complete the html table
+			output += "</table>";
+	}
+	catch (Exception e) {
+		output = "Error while reading the users.";
+		System.err.println(e.getMessage());
+	}
+	return output;
+}
+
+
 }
