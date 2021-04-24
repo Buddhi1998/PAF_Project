@@ -77,6 +77,36 @@ public user createuser(user u1) {
 	return u1;
 }
 
+public user getuserid(int Id) {
+	String getsql = "SELECT * FROM `users` WHERE `Id` = '"+Id+"' ";
+	user ur = new user();
+	Connection con = getConnection();
+	
+	try {
+		Statement st = con.createStatement();
+		ResultSet u1 = st.executeQuery(getsql);
+		
+		while(u1.next()) {
+			
+			ur.setId(u1.getInt(1));
+			ur.setFname(u1.getString(2));
+			ur.setLname(u1.getString(3));
+			ur.setEmail(u1.getString(4));
+			ur.setAddress(u1.getString(5));
+			ur.setPhone_n(u1.getInt(6));
+			ur.setUsername(u1.getString(7));
+			ur.setPassword(u1.getString(8));
+			
+		}
+		
+		//con.close();
+	
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return ur;
+}
 
 
 public String readAddusers() {
